@@ -1,0 +1,138 @@
+<template name="venuesList">
+  <div class="venueList listStyle">
+    <div class="row align-center">
+      <a href="{{pathFor 'addVenue'}}"> <button type="submit" class=" waves-effect waves-light btn-large blue">Add Venue</button></a>
+    </div>
+    <ul class="collection">
+      {{#each venueInVenues}}
+        {{#if isDeleted deleted}}
+          <li class="collection-item avatar">
+            <span>
+              <i class="fa fa-map-marker circle {{getColor}}"></i>
+            </span>
+            <span class="title">{{name}}</span>
+            <p>
+              <b class="pill roomType deep-orange"> <i class="fa fa-bookmark-o"></i>{{roomno}}</b>
+              <b class="pill roomType csitegreen"> <i class="fa fa-info-circle"></i>{{type}}</b>
+              <b class="pill capacity blue"> <i class="fa fa-users"></i>{{capacity}}</b>
+            </p>
+            <ul class="secondary-content">
+              <li class="viewVenue">
+                <a href="/venues/{{_id}}" title="Manage Venue">
+                  <i class="fa fa-cog"></i>
+                </a>
+              </li>
+              <li class="delVenue">
+                <a href="#" title="Delete Venue">
+                  <i class="fa fa-trash"></i>
+                </a>
+              </li>
+            </ul>
+          </li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </div>
+</template>
+
+<template name="addVenue">
+  <div class="container">
+    <form id="addVenue">
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <input id="vname" name="vname" type="text" class="validate">
+          <label for="vname">Enter Venue Name</label>
+        </div>
+        <div class="input-field col s12 m6">
+          <input id="roomno" name="roomno" type="text" class="validate">
+          <label for="roomno">Enter Room No</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6 m3">
+          <input type="radio" name="type" id="Class" value="Class">
+          <label for="Class">Class</label>
+        </div>
+        <div class="col s6 m3">
+          <input type="radio" name="type" id="Auditorium" value="Auditorium">
+          <label for="Auditorium">Auditorium</label>
+        </div>
+        <div class="col s6 m3">
+          <input type="radio" name="type" id="Lab" value="Lab">
+          <label for="Lab">Lab</label>
+        </div>
+        <div class="col s6 m3">
+          <input type="radio" name="type" id="Other" value="Other">
+          <label for="Other">Other</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <input id="capacity" name="capacity" type="text" class="validate">
+          <label for="capacity">Enter Venue Capacity</label>
+        </div>
+        <div class="col s12 m6">
+          <select class="" name="projector" id="projector">
+            <option value="">has projector?</option>
+            <option value="true">yes</option>
+            <option value="false">no</option>
+          </select>
+        </div>
+      </div>
+      <div class="row align-center">
+        <button type="submit" class=" waves-effect waves-light btn-large blue">Add Venue</button>
+      </div>
+    </form>
+  </div>
+</template>
+
+<template name="manageVenue">
+  <div class="container">
+    <form id="manageVenue">
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <input id="vname" name="vname" type="text" class="validate" value="{{name}}">
+          <label for="vname">Enter Venue Name</label>
+        </div>
+        <div class="input-field col s12 m6">
+          <input id="roomno" name="roomno" type="text" class="validate" value="{{roomno}}">
+          <label for="roomno">Enter Room No</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6 m3">
+          <input type="radio" name="type" id="Class" value="Class">
+          <label for="Class">Class</label>
+        </div>
+        <div class="col s6 m3">
+          <input type="radio" name="type" id="Auditorium" value="Auditorium">
+          <label for="Auditorium">Auditorium</label>
+        </div>
+        <div class="col s6 m3">
+          <input type="radio" name="type" id="Lab" value="Lab">
+          <label for="Lab">Lab</label>
+        </div>
+        <div class="col s6 m3">
+          <input type="radio" name="type" id="Other" value="Other">
+          <label for="Other">Other</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <input id="capacity" name="capacity" type="text" class="validate" value="{{capacity}}">
+          <label for="capacity">Enter Venue Capacity</label>
+        </div>
+        <div class="col s12 m6">
+          <select class="" name="projector" id="projector">
+            <option value="">has projector?</option>
+            <option value="true" id="proYes">yes</option>
+            <option value="false" id="proNo">no</option>
+          </select>
+        </div>
+      </div>
+      <div class="row align-center">
+        <button type="submit" class=" waves-effect waves-light btn-large blue">Update Venue</button>
+      </div>
+    </form>
+  </div>
+</template>
