@@ -1,0 +1,187 @@
+<template name="notifications">
+  <div class="container">
+    {{#if createNotif}}
+    <div class="row align-center">
+      <button type="submit" class="spaceup createNotif waves-effect waves-light btn-large blue">Add Notification</button>
+    </div>
+    {{else}}
+    cannot create
+    {{/if}}
+    <div class="row">
+      <div class="team listStyle">
+        <ul class="collection">
+          {{#each notifInNotif}}
+            {{#if notOld}}
+              <li class="collection-item avatar {{classFor priority}} dismissable">
+                <span>
+                  <i class="fa fa-bell circle priorityCh"></i>
+                </span>
+                <span class="bold message">{{message}}</span>
+                <p>
+                  {{> timeago createdOn}} by <strong>{{user}}</strong> <b class="pill">{{eventname}}</b>
+                </p>
+                <ul class="secondary-content">
+                  <li class="delNotif">
+                    <a href="#" title="Remove Notification">
+                      <i class="fa fa-trash"></i>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            {{/if}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+<template name="changePriori">
+  <div class="row">
+    <div class="col s6 m3">
+      <input type="radio" name="priority" id="basic" value="basic">
+      <label for="basic">basic</label>
+    </div>
+    <div class="col s6 m3">
+      <input type="radio" name="priority" id="low" value="low" checked>
+      <label for="low">low</label>
+    </div>
+    <div class="col s6 m3">
+      <input type="radio" name="priority" id="medium" value="medium">
+      <label for="medium">medium</label>
+    </div>
+    <div class="col s6 m3">
+      <input type="radio" name="priority" id="high" value="high">
+      <label for="high">high</label>
+    </div>
+  </div>
+</template>
+<template name="addNotif">
+  <div class="row">
+    <div class="input-field col s12 m12">
+      <textarea id="message" name="message" class="materialize-textarea"></textarea>
+      <label for="message">Textarea</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s6 m3">
+      <input type="radio" name="priority" id="basic" value="basic">
+      <label for="basic">basic</label>
+    </div>
+    <div class="col s6 m3">
+      <input type="radio" name="priority" id="low" value="low" checked>
+      <label for="low">low</label>
+    </div>
+    <div class="col s6 m3">
+      <input type="radio" name="priority" id="medium" value="medium">
+      <label for="medium">medium</label>
+    </div>
+    <div class="col s6 m3">
+      <input type="radio" name="priority" id="high" value="high">
+      <label for="high">high</label>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col s6 m6">
+      <strong>is public?</strong>
+      <div class="switch">
+          <label>
+            No
+            <input type="checkbox" name="isPublic" id="isPublic">
+            <span class="lever"></span>
+            Yes
+          </label>
+      </div>
+    </div>
+    <div class="col s6 m6">
+      <strong>auto delete</strong>
+      <div class="switch">
+          <label>
+            No
+            <input type="checkbox" name="autoDelete" id="autoDelete" checked="checked">
+            <span class="lever"></span>
+            Yes
+          </label>
+      </div>
+    </div>
+  </div>
+
+</template>
+<template name="notificationsPub">
+  <div class="row spaceup">
+
+
+    <div class="col s12 m6">
+      <div class="notifications listStyle">
+        <ul class="collection">
+        {{#each notifications}}
+            {{#if isHighPriority priority}}
+              {{#if notOld}}
+                <li class="collection-item avatar {{classFor priority}} dismissable">
+                  <span>
+                    <i class="fa fa-bell circle priorityCh"></i>
+                  </span>
+                  <span class="bold message">{{message}}</span>
+                  <p>
+                    {{> timeago createdOn}} by <strong>{{user}}</strong>
+                    {{#if isEvent}}
+                      <b class="pill white black-text"> <i class="fa fa-circle"></i>{{eventname}}</b>
+                    {{/if}}
+                  </p>
+                  <ul class="secondary-content">
+                    {{#if creator user}}
+                      <li class="delNotif">
+                        <a href="#" title="Remove Notification">
+                          <i class="fa fa-trash "></i>
+                        </a>
+                      </li>
+                    {{/if}}
+                  </ul>
+                </li>
+              {{/if}}
+            {{/if}}
+        {{/each}}
+        </ul>
+      </div>
+    </div>
+    <div class="col s12 m6">
+      <div class="notifications listStyle">
+        <ul class="collection">
+        {{#each notifications}}
+            {{#if isNotHighPriority priority}}
+              {{#if notOld}}
+                <li class="collection-item avatar {{classFor priority}} dismissable">
+                  <span>
+                    <i class="fa fa-bell circle priorityCh"></i>
+                  </span>
+                  <span class="bold message">{{message}}</span>
+                  <p>
+                    {{> timeago createdOn}} by <strong>{{user}}</strong>
+                    {{#if isEvent}}
+                      <b class="pill white black-text"> <i class="fa fa-circle"></i>{{eventname}}</b>
+                    {{/if}}
+                  </p>
+                  <ul class="secondary-content">
+                    {{#if creator user}}
+                      <li class="delNotif">
+                        <a href="#" title="Remove Notification">
+                          <i class="fa fa-trash "></i>
+                        </a>
+                      </li>
+                    {{/if}}
+                  </ul>
+                </li>
+              {{/if}}
+            {{/if}}
+        {{/each}}
+      </ul>
+      </div>
+    </div>
+  </div>
+</template>
+<template name="publicLayout">
+  {{>header}}
+  <div class="contanier spaceup">
+    {{>yield}}
+  </div>
+</template>

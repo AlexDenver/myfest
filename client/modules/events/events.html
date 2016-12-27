@@ -1,0 +1,189 @@
+<template name="eventsList">
+  <div class="eventList listStyle">
+    <ul class="collection">
+      {{#each eventInEvents}}
+        <li class="collection-item avatar">
+          <span>
+            <i class="fa fa-cube circle {{getColor}}"></i>
+          </span>
+          <span class="title">{{name}}</span>
+          <p>
+            <b>{{friendly}}</b>
+          </p>
+          <ul class="secondary-content">
+            <li class="viewTeam">
+              <a href="/events/{{_id}}" title="Manage Team">
+                <i class="fa fa-cog"></i>
+              </a>
+            </li>
+            <li class="delEvent">
+              <a href="#" title="Delete Event">
+                <i class="fa fa-trash"></i>
+              </a>
+            </li>
+          </ul>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</template>
+
+<template name="addEvent">
+  <div class="container">
+    <form id="addEvent">
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <input id="ename" name="ename" type="text" class="validate">
+          <label for="ename">Enter Event Name</label>
+        </div>
+
+        <div class="input-field col s12 m6">
+          <input id="efriendly" name="efriendly" type="text" class="validate">
+          <label for="efriendly">Enter Friendly Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 m12">
+          <input id="pcount" name="pcount" type="number" class="validate" value="{{pcount}}">
+          <label for="pcount">Enter participant Count</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 m12">
+          <input id="rcount" name="rcount" type="number" class="validate">
+          <label for="rcount">Enter No of Rounds</label>
+        </div>
+      </div>
+      <div class="row align-center">
+        <button type="submit" class=" waves-effect waves-light btn-large blue">Add Event</button>
+      </div>
+    </form>
+  </div>
+</template>
+
+<template name="manageEvent">
+  <div class="container">
+    <form id="manageEvent">
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <input id="ename" name="ename" type="text" class="validate" value="{{name}}">
+          <label for="ename">Enter Event Name</label>
+        </div>
+
+        <div class="input-field col s12 m6">
+          <input id="efriendly" name="efriendly" type="text" class="validate" value="{{friendly}}">
+          <label for="efriendly">Enter Friendly Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <input id="usn" name="usn" type="text" class="validate" value="{{usn}}">
+          <label for="usn">Enter Event Head User Name</label>
+        </div>
+        <div class="input-field col s12 m6">
+          <input id="pcount" name="pcount" type="number" class="validate" value="{{pcount}}">
+          <label for="pcount">Enter participant Count</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 m12">
+          <input id="rcount" name="rcount" type="number" class="validate" value="{{rounds}}">
+          <label for="rcount">Enter No of Rounds</label>
+        </div>
+      </div>
+      <div class="row align-center">
+        <button type="submit" class=" waves-effect waves-light btn-large blue">Update Event</button>
+      </div>
+    </form>
+  </div>
+</template>
+<template name="ehManageEvent">
+  <div class="container">
+    <div class="row">
+      <div class="row spaceup">
+        <div class="col s12 align-center">
+          <button type="button" class="addRound waves-effect waves-light btn-large csitegreen">Add Round</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {{#each roundsInEvent}}
+        {{#if active}}
+        <div class="col s12 m4">
+          <div class="card rounds csitegreen white-text">
+            <div class="col offset-s10 s2">
+              <a href="#" class="white-text">
+                <i class="delRound fa fa-trash spacer spaceup" data-count='{{@index}}'></i>
+              </a>
+            </div>
+            <div class="card-content ">
+              <p class="align-center">
+                <b class="pill white black-text">Round: {{name}}</b>
+              </p>
+              <h6>Qulifying Count: <strong>{{qualify}}</strong></h6>
+              <h6>Max Score: <strong>{{getTotal this}}</strong></h6>
+              <h6>Round Time: <strong>{{roundStart}} - {{roundEnd}}</strong></h6>
+              <h6>Round Venue: <strong>{{venue}}</strong></h6>
+              <h6>Judges: <strong>{{judges}}</strong></h6>
+              <a href="/judge/{{judgeSheet}}" class=" bold"><button type="button" class="btn-small  waves-effect waves-light white btn teal-text">Judge</button></a>
+            </div>
+            <div class="card-action jsheet">
+              <a href="/sheets/manage/{{judgeSheet}}" class=" bold"><b class="pill white teal-text"><i class="fa  fa-tasks"></i>Sheets</b></a>
+              {{#if quizId}}
+                <a href="/quiz/manage/{{quizId}}" class="bold"><b class="pill deep-orange white-text"><i class="fa  fa-question-circle"></i>Quiz</b></a>
+              {{/if}}
+
+            </div>
+          </div>
+        </div>
+        {{/if}}
+      {{/each}}
+    </div>
+  </div>
+</template>
+<template name="addEventModal">
+  <div class="row">
+    <div class="input-field col s8 ">
+      <input id="name" name="name" type="text" class="validate">
+      <label for="name">Enter Round Name</label>
+    </div>
+    <div class="input-field col s4 quizze">
+      <small class="bold">Include Quiz?</small>
+      <div class="switch">
+        <label for="useQuiz">
+          No
+          <input type="checkbox" name="useQuiz" id="useQuiz">
+          <span class="lever"></span>
+          Yes
+        </label>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="input-field col s6 ">
+      <input id="qualifying" name="qualifying" type="text" class="validate">
+      <label for="qualifying">Enter Number of Participants Qualifying</label>
+    </div>
+    <div class="input-field col s6">
+      <input id="judge" name="judge" type="text" class="validate">
+      <label for="judge">Enter Judges Count</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <input id="venue" name="venue" type="text" class="validate">
+      <label for="venue">Enter Venue Name</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class=" col s6">
+      <label for="sevent">Enter Event Start Time</label>
+      <input type="time" class="timepicker" id="sevent" name="stime">
+    </div>
+    <div class=" col s6">
+      <label for="eevent">Enter Event End Time</label>
+      <input type="time" class="timepicker" id="eevent" name="etime">
+    </div>
+  </div>
+</template>
