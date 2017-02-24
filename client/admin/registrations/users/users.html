@@ -1,0 +1,189 @@
+<template name="users">
+  <div class="users listStyle">
+    <p class="center-align">
+      <a href="{{pathFor 'manageUser'}}" class="btn-blue waves-effect waves-light btn">Add User</a>
+    </p>
+    <ul class="collection">
+      {{#each user}}
+        <li class="collection-item avatar">
+          <span>
+            <i class="fa fa-user circle"></i>
+          </span>
+          <span class="title">{{userType}}</span>
+          <p>{{mobile}} <br>
+             <b>@{{username}}  </b>
+          </p>
+          <ul class="secondary-content">
+            <li class="manageUser">
+              <a href="/team/" title="Manage User">
+                <i class="fa fa-cog"></i>
+              </a>
+            </li>
+            <li class="delUser">
+              <a href="#" title="Delete User">
+                <i class="fa fa-trash"></i>
+              </a>
+            </li>
+          </ul>
+        </li>
+        {{/each}}
+    </ul>
+  </div>
+</template>
+<template name="addUser">
+  <div class="formWrap container">
+    <form id="addUser">
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="username" name="username" type="text" class="validate">
+              <label for="username">Enter Username</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="password" type="password" name="password" class="validate">
+              <label for="password">Enter Password</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="password2" type="password" name="password2" class="validate">
+              <label for="password2">Re-enter Password</label>
+            </div>
+          </div>
+          <div class="row">
+            <span>User Type</span>
+            <div class="input-field col s12">
+              <div class="col s6 m4 userType">
+                <input type="radio" id="Custom" name="userType" value="Custom" checked="checked">
+                <label for="Custom">Custom</label>
+              </div>
+                {{#each userTypes}}
+                  <div class="col s6 m4 userType">
+                    <input type="radio" id="{{value}}" name="userType" value="{{value}}">
+                    <label for="{{value}}">{{value}}</label>
+                  </div>
+                {{/each}}
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m6 privs">
+          <div class="row evSelector">
+            <div class="input-field col s12">
+              <select name="eventName">
+                <option value="" disabled selected>Select Event</option>
+                {{#each eventInEvents}}
+                <option value="{{name}}">{{name}}</option>
+                {{/each}}
+              </select>
+              <label>Event Head for...</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12 align-center">
+              <h4>Set Priveleges</h4>
+              <small>Click on icons to give access</small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s4 align-center">
+              <input type="checkbox" name="Notification" id="Notification">
+              <label for="Notification">
+              <h1>
+                <i class="fa fa-bullhorn "></i>
+              </h1>
+              <large>Notification</large>
+              </label>
+            </div>
+            <div class="col s4 align-center">
+              <input type="checkbox" name="User" id="User">
+              <label for="User">
+              <h1>
+                <i class="fa fa-user-plus"></i>
+              </h1>
+              <large>Users</large>
+              </label>
+            </div>
+            <div class="col s4 align-center">
+              <input type="checkbox" name="Team" id="Team">
+              <label for="Team">
+              <h1>
+                <i class="fa fa-flag"></i>
+              </h1>
+              <large>Teams</large>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s4 align-center">
+              <input type="checkbox" name="Scheduler" id="Scheduler">
+              <label for="Scheduler">
+              <h1>
+                <i class="fa fa-clock-o "></i>
+              </h1>
+              <large>Scheduler</large>
+              </label>
+            </div>
+            <div class="col s4 align-center">
+              <input type="checkbox" name="Event" id="Event">
+              <label for="Event">
+              <h1>
+                <i class="fa fa-cubes"></i>
+              </h1>
+              <large>Events</large>
+              </label>
+            </div>
+            <div class="col s4 align-center">
+              <input type="checkbox" name="Venue" id="Venue">
+              <label for="Venue">
+              <h1>
+                <i class="fa fa-map-marker"></i>
+              </h1>
+              <large>Venues</large>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s4 align-center">
+              <input type="checkbox" name="Feedback" id="Feedback">
+              <label for="Feedback">
+              <h1>
+                <i class="fa fa-star-half-o"></i>
+              </h1>
+              <large>Feedback</large>
+              </label>
+            </div>
+            <div class="col s4 align-center">
+              <input type="checkbox" name="Score" id="Score">
+              <label for="Score">
+                <h1>
+                  <i class="fa fa-trophy"></i>
+                </h1>
+                <large>Scores</large>
+              </label>
+            </div>
+            <div class="col s4 align-center">
+              <input type="checkbox" name="Master" id="Master">
+              <label for="Master">
+              <h1>
+                <i class="fa fa-desktop"></i>
+              </h1>
+              <large>Master</large>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 align-center">
+          <button type="submit" name="add" class="submitAdd waves-effect waves-light btn-large blue">
+            <i class="fa fa-user-plus"></i>
+            Create User
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>

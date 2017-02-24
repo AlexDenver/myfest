@@ -1,0 +1,72 @@
+<template name="navigation">
+      <navi id="mp-menu" class="mp-menu">
+        <div class="mp-level">
+          <h2 class="icon icon-world">Menu</h2>
+          <ul>
+            {{#each availableModules}}
+              {{#if scheduler this}}
+              <li class="">
+                <a class="" href="{{pathFor 'Scheduler'}}">{{this}}</a>
+              </li>
+              {{else}}
+                {{#if isNotification this}}
+                  <li class="">
+                    <a class="" href="{{pathFor 'Notification'}}">{{this}}</a>
+                  </li>
+                {{else}}
+                    {{#if isMaster}}
+                      <li></li>
+                    {{else}}
+                      {{#if isEventAndEh this}}
+                        <li class="">
+                          <a  href="/event/{{getEventId}}">Manage {{this}}</a>
+                        </li>
+                      {{else}}
+                        <li class="">
+                          <a class="" href="#">{{this}}</a>
+                          <div class="mp-level">
+                            <h2 class="">{{this}} Options</h2>
+                            <ul>
+                              {{#if mergedRoute 'add'}}
+                              <li class="">
+                                <a  href="{{mergedRoute 'add'}}" >Add {{this}}</a>
+                              </li>
+                              {{/if}}
+                              {{#if mergedRoute 'manage'}}
+                              <li class="">
+                                <a  href="{{mergedRoute 'manage'}}" >Manage {{this}}</a>
+                              </li>
+                              {{/if}}
+                              {{#if mergedRoute 'view'}}
+                              <li class="">
+                                <a href="{{mergedRoute 'view'}}" >View {{this}}</a>
+                              </li>
+                              {{/if}}
+                            </ul>
+                          </div>
+                        </li>
+                      {{/if}}
+                      {{#if isReception this}}
+                      <li class="">
+                        <a class="" href="{{pathFor 'Team'}}">Team Codes</a>
+                      </li>
+                      <li class="">
+                        <a class="" href="{{pathFor 'listTeam'}}">Team List</a>
+                      </li>
+                      <li class="">
+                        <a class="" href="{{pathFor 'scoreTeam'}}">Scores</a>
+                      </li>
+                      {{/if}}
+                    {{/if}}
+                  {{/if}}
+
+              {{/if}}
+            {{/each}}
+
+          </ul>
+        </div>
+      </navi>
+      <script>
+
+    	</script>
+</template>

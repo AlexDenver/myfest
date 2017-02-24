@@ -1,0 +1,44 @@
+<template name="letter">
+  <div class="wrap">
+    <page size="a4">
+      <div class="">
+        <header>
+          <div class="leftSide">
+            <img src="/img/college-logo.jpg" alt="Aloysius Logo" class="inline-block">
+            <div class="inline-block">
+              <strong class="block">St Aloysius College (Autonomous)</strong>
+              <strong class="block">Mangaluru - 575 003, Karnataka</strong>
+              <small class="block">Re-accredited by NAAC with ‘A’ Grade - CGPA 3.62 (3rd Cycle)</small>
+              <small class="block">Recognized by UGC as "College with Potential for Excellence"</small>
+            </div>
+            <img src="/img/csite-bw-oline.png" alt="COMPOSITE 2k17 Logo" class="inline-block right">
+          </div>
+
+        </header>
+        <h5 class="align-center">Letter of Permission</h5>
+        <div class="letter-body">
+          Regisrtation ID: <strong>{{reg_id}}</strong>
+          <p>College Name: <strong>{{college}}</strong></p>
+          <strong>to whom it may concern,</strong>
+          <p class="indent">this document when duly filled grants the students of your department listed below explicit permission to participate in various events conducted at the National Level Inter-Collegiate Level Fest COMPOSITE 2k17 by the Department of BCA of St Aloysius Degree College (Autonomous), Mangalore on the dates 02 &amp; 03 of February 2017</p>
+        </div>
+        <h5>
+          Participants List
+        </h5>
+        <ol class="participants">
+          {{#each names}}
+          <li>{{name}}</li>
+          {{/each}}
+        </ol>
+      </div>
+      <div class="signature-box">
+        <span>(Authorized Signature)</span>
+      </div>
+      <small>
+        <p class="center">
+          <i>this form can be signed by any authorative member of the college (Dean/HOD/Principal/Staff in-charge)</i>
+        </p>
+      </small>
+    </page>
+  </div>
+</template>

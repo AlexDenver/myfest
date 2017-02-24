@@ -1,0 +1,53 @@
+<template name="profile">
+  <div class="container">
+      <div class="head spaceup">
+          <div class="circle">
+          <i class="fa fa-user-circle-o"></i>
+          </div>
+      </div>
+      <div class="card profileCard">
+          <form class="profile">
+            <div class="row">
+              <div class="input-field col offset-s1 s10 offset-m3 m6 center-align">
+                <large>Update Details.</large>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col offset-s1 s10 offset-m3 m6 center-align">
+                <input id="name" type="text" name="name" class="validate" value="{{name}}">
+                <label for="name">Name</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col offset-s1 s10 offset-m3 m6 center-align">
+                <input id="mobile" type="number" name="mobile" value="{{mobile}}" class="validate">
+                <label for="mobile">Mobile</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col offset-s1 s10 offset-m3 m6 center-align">
+                <large>Update Login Password.</large>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col offset-s1 s10 offset-m3 m6 center-align">
+                <input id="password" type="password" name="password" class="validate">
+                <label for="password">Password</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col offset-s1 s10 offset-m3 m6 center-align">
+                <input id="password2" type="password" name="password2" class="validate">
+                <label for="password2">Re-enter Password</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 center-align">
+
+                <button type="submit" class="submit waves-effect waves-light btn-large red">Update</button>
+              </div>
+            </div>
+          </form>
+      </div>
+  </div>
+</template>

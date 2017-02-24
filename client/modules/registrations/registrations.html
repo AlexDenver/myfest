@@ -1,0 +1,270 @@
+<template name="registrations">
+  <div class="team">
+    <div class="row">
+      {{#each teamInTeams}}
+        {{#if canActivate active}}
+        <div class="col s12 m3">
+          <div class="card">
+            <div class="card-image">
+              <img src="/img/team.jpg">
+              <span class="card-title black-text"><strong>{{info.college}}</strong></span>
+              <a title="Manage Team" class="btn-floating halfway-fab waves-effect waves-light blue right spacer" href="/registrations/{{_id}}" target="_blank"><i class="fa fa-gear"></i></a>
+              <a title="Delete Team" class="delTeam btn-floating halfway-fab waves-effect waves-light red right spacer" ><i class="fa fa-trash"></i></a>
+              <a  title="{{verifiedMsg verified}}" class="btn-floating halfway-fab waves-effect waves-light csitegreen right spacer"><i class="fa {{#if verified}}fa-check{{else}}fa-exclamation-circle{{/if}}"></i></a>
+              <b class="spacel left pill roomType deep-orange"> <i class="fa fa-bolt"></i>{{info.prime}}</b>
+            </div>
+            <div class="card-content spaceup">
+              <h5><strong>{{reg_id}}</strong></h5>
+              <p><strong>{{info.email}} || {{info.contact}}</strong></p>
+              <p><strong>Require Stay: {{info.stay}}</strong></p>
+              <p><strong>Reg. Date:</strong> {{>timeago info.reg_date}}</p>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="detailedTeam">
+  <div class="teamTable">
+    <p>
+      <a href="{{pathFor 'viewTeam'}}" class="btn-blue waves-effect waves-light btn">Go Back</a>
+    </p>
+    <p>
+      College: <strong>{{teamx.info.college}}</strong>
+    </p>
+    <p>Reg ID: <strong>{{teamx.reg_id}}</strong></p>
+    <p>Phone : <strong>{{teamx.info.phone}}</strong></p>
+    <p>Verified Team: <strong>{{printVerified teamx.verified}}</strong></p>
+    <p>AdiT Count: <strong>{{teamx.team.aditCount}}</strong></p>
+    <table class="bordered responsive-table">
+      <thead>
+        <tr>
+          <th>Event</th>
+          <th>Participant 1</th>
+          <th>Participant 2</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each objToPairs teamx.team}}
+        {{#if isNotAdit "adit"}}
+        <tr>
+          <th>{{key}}</th>
+          <td><span class="editName" data-ab="a" data-tevent="{{key}}" >{{value.p.a}}</span>
+            <input name="pAditA" id="adit{{value.p.a}}" type="checkbox" checked="{{isAditx 'a'}}" {{aditDisable}}>
+            <label data-ab="a" class="aditChk" for="adit{{value.p.a}}">Adit</label>
+          </td>
+          {{#if value.p.b}}
+          <td><span class="editName" data-ab="b" data-tevent="{{key}}" >{{value.p.b}}</span>
+            <input name="pAditB" id="adit{{value.p.b}}" type="checkbox" checked="{{isAditx 'b'}}" {{aditDisable}}>
+            <label data-ab="b" class="aditChk" for="adit{{value.p.b}}">Adit</label>
+          </td>
+          {{else}}
+          <td></td>
+          {{/if}}
+        </tr>
+        {{/if}}
+        {{/each}}
+      </tbody>
+    </table>
+    <div class="container spaceup">
+      <div class="row">
+          <div class="col s6">
+              <!-- <input type="text" name="pevent" teamCode="Enter TeamCode"> -->
+                <select class="" name="teamCode">
+                  {{#each codes}}
+                  {{#if used}}
+                  {{else}}
+                  <option value="{{code}}" data-id="{{_id}}">{{code}}</option>
+                  {{/if}}
+                  {{/each}}
+                </select>
+          </div>
+        <div class="col s6 align-center">
+          <button type="submit" class="checkIn spaceup waves-effect waves-light btn-large blue">Check-in</button>
+        </div>
+      </div>
+    </div>
+    <form id="updateName">
+      <input type="text" name="pevent" placeholder="Enter Event">
+      <input type="text" name="pname" placeholder="Enter Name">
+      <input type="text" name="pab" placeholder="Enter A/B">
+      <button type="submit" name="button">submit</button>
+    </form>
+  </div>
+</template>
+<template name="teamCode">
+  <div class="col s6">
+    <select class="" name="teamCode">
+      {{#each codes}}
+      {{#if used}}
+      {{else}}
+      <option value="{{code}}" data-id="{{_id}}">{{code}}</option>
+      {{/if}}
+      {{/each}}
+    </select>
+  </div>
+</template>
+<template name="addTeam">
+  <div class="container">
+  <form id="regTeam" class="">
+    <div class="row">
+      <div class="input-field col s12 m12">
+        <input id="prime" name="prime" type="text" class="validate">
+        <label for="prime">Enter primary team member</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 m12">
+        <input id="email" name="email" type="email" class="validate">
+        <label for="email">Enter email...</label>
+      </div>
+    </div>
+    <div class="row">
+      <strong>Require Stay?</strong>
+      <div class="col s12 m12">
+        <div class="switch">
+          <label for="stay">
+            No
+            <input type="checkbox" name="stay" id="stay">
+            <span class="lever"></span>
+            Yes
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 m6">
+        <input id="college" name="college" type="text" class="validate">
+        <label for="college">Enter College Name</label>
+      </div>
+      <div class="input-field col s12 m6">
+        <input id="contact" name="contact" type="text" class="validate">
+        <label for="contact">Enter Contact Number</label>
+      </div>
+    </div>
+
+    {{#each eventsList}}
+    <div class="row">
+      <p>
+        <b>{{name}}</b> ({{friendly}})
+      </p>
+      {{#each arrayOf count}}
+      <div class="input-field col s10 m4">
+        <input id="{{../name}}{{this}}" name="{{../name}}[{{this}}]" type="text" class="validate">
+        <label for="{{../name}}{{this}}">Enter Participant Name</label>
+      </div>
+      <div class="col s2 m2 aditBox align-center">
+        <input type="checkbox" id="{{../name}}{{this}}ad" name="{{../name}}[{{this}}][adit]" class="adit" {{aditDisable ../name}}>
+        <label for="{{../name}}{{this}}ad">ADiT</label>
+      </div>
+      {{/each}}
+    </div>
+    {{/each}}
+
+    <div class="row">
+      <div class="col s12 align-center">
+        <button type="submit" class=" waves-effect waves-light btn-large blue">Register</button>
+
+      </div>
+
+    </div>
+  </form>
+</div>
+</template>
+<template name="teamCodes">
+  <div class="row spaceup">
+    <div class="col s12 align-center">
+      <button type="submit" class="addCode waves-effect waves-light btn-large blue">Add Team Code</button>
+    </div>
+  </div>
+  <div class="container">
+    <table class="striped">
+        <thead>
+          <tr>
+              <th >Team Code</th>
+              <th >In Use</th>
+              <th >College</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each codes}}
+            <tr>
+              <td>{{code}}</td>
+              <td>{{used}}</td>
+              <td>{{college}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+  </div>
+</template>
+
+<template name="teamList">
+  <div class="row spaceup">
+    <div class="col s6 align-center">
+      <strong>List by Team Code</strong>
+      <select name="teamCode" id="tcode">
+        <option value="def">Select TeamCode...</option>
+        {{#each allcodes}}
+        {{#if used}}
+        <option value="{{code}}">{{code}}</option>
+        {{/if}}
+        {{/each}}
+        {{initSelect}}
+      </select>
+    </div>
+    <div class="col s6 align-center">
+      <strong>List by Event</strong>
+      <select name="ecode" id="ecode">
+        <option value="def">Select an Event...</option>
+        {{#each allEvents}}
+          <option value="{{name}}">{{name}}</option>
+        {{/each}}
+        {{initSelect}}
+      </select>
+    </div>
+  </div>
+  <div class="container printready">
+    {{#if listByCode}}
+      <strong>COLLEGE: {{getCollege}}</strong>
+      <table class="striped">
+          <thead class="bold">
+            <tr>
+                <th >Event</th>
+                <th >Participant 1</th>
+                <th >Participant 2</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each partiByCode}}
+              <tr>
+                <td>{{event}}</td>
+                <td>{{getName 0}}</td>
+                <td>{{getName 1}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{else}}
+        <table class="striped">
+            <thead class="bold">
+              <tr>
+                  <th >{{getEvent}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each partiByEvent}}
+                <tr>
+                  <td>{{getName 0}} [{{team}}]</td>
+                  <td>{{getName 1}} [{{team}}] </td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+      {{/if}}
+  </div>
+</template>

@@ -1,0 +1,295 @@
+<template name="userHome">
+  <div class="mainWrap">
+    <!-- Push Wrapper -->
+    <div class="mp-pusher" id="mp-pusher">
+      {{> navigation}}
+      <div class="scroller"><!-- this is for emulating position fixed of the nav -->
+        <div class="scroller-inner">
+          <!-- Top Navigation -->
+          {{> topNav}}
+          <div class="row">
+            <div class="col s12">
+              {{>quickLinks}}
+            </div>
+          </div>
+          {{#if userType 'Event Head'}}
+          <div class="row">
+            <div class="col s12 m4">
+              <h5 class="align-center">Event participants</h5>
+              <!--participants-->
+              {{>participants}}
+
+            </div>
+            <div class="col s12 m8">
+              <!--widget-->
+              {{>eventUtil}}
+            </div>
+          </div>
+          {{/if}}
+          <!--notifications-->
+
+          <div class="row">
+            <h4 class="align-center">Notifications</h4>
+            {{>notifWidget}}
+          </div>
+        </div><!-- /scroller-inner -->
+      </div><!-- /scroller -->
+    </div>
+  </div>
+</template>
+<template name="quickLinks">
+  {{#if isDefault}}
+    <p class="spaceup align-center">
+      <div class="amber blue-grey-text bold defaultUser pill">
+        <span>
+          <i class="white-text fa fa-circle spacer"></i>Welcome, for security purposes <a href="#" class="black-text">we recommend to click here &amp; change your password from default</a>
+        </span>
+      </div>
+    </p>
+  {{/if}}
+  {{#if isEventHead}}
+  <div class="row align-center">
+    <div class="col s12 m4">
+      <button type="button" class="spaceup createNotif waves-effect waves-light btn-large blue bold"><i class="fa fa-bell left"></i> Add Notification</button>
+    </div>
+    <div class="col s12 m4">
+      <a href="/event/{{getEventId}}">
+        <button type="button" class="spaceup waves-effect waves-light btn-large blue bold"><i class="fa fa-gear left"></i> Manage Event</button>
+      </a>
+    </div>
+    <div class="col s12 m4">
+      <a href="/quiz/manage">
+        <button type="button" class="spaceup waves-effect waves-light btn-large blue bold"><i class="fa fa-question-circle left"></i> Quiz Panel</button>
+      </a>
+    </div>
+  </div>
+  {{/if}}
+  {{#if isReception}}
+
+  {{>utility}}
+
+  <div class="row align-center">
+    <div class="col s12 m4">
+      <a href="/registrations/register">
+        <button type="button" class="spaceup waves-effect waves-light btn-large csitegreen bold">Register Team</button>
+      </a>
+    </div>
+    <div class="col s12 m4">
+      <a href="/">
+        <button type="button" class="spaceup checkinTeam waves-effect waves-light btn-large deep-orange bold">Checkin Team</button>
+      </a>
+    </div>
+    <div class="col s12 m4">
+      <button type="button" class="spaceup createNotif waves-effect waves-light btn-large blue bold">Add Notification</button>
+    </div>
+  </div>
+  {{/if}}
+  {{#if isAlpha}}
+
+  {{>utility}}
+
+  <div class="row align-center">
+    <div class="col s12 m4">
+      <a href="/scores">
+        <button type="button" class="spaceup waves-effect waves-light btn-large csitegreen bold">View Scores</button>
+      </a>
+    </div>
+    <div class="col s12 m4">
+      <a href="/registrations/list">
+        <button type="button" class="spaceup waves-effect waves-light btn-large deep-orange bold">View Participants</button>
+      </a>
+    </div>
+    <div class="col s12 m4">
+      <button type="button" class="spaceup createNotif waves-effect waves-light btn-large blue bold">Add Notification</button>
+    </div>
+  </div>
+  {{/if}}
+</template>
+<template name="notifWidget">
+  <div class="col s12 m6">
+    <div class="notifications listStyle">
+      <ul class="collection">
+      {{#each notifications}}
+          {{#if isHighPriority priority}}
+            {{#if notOld}}
+              <li class="collection-item avatar {{classFor priority}} dismissable">
+                <span>
+                  <i class="fa fa-bell circle priorityCh"></i>
+                </span>
+                <span class="bold message">{{message}}</span>
+                <p>
+                  {{> timeago createdOn}} by <strong>{{user}}</strong>
+                  {{#if isEvent}}
+                    <div class="amber blue-grey-text bold defaultUser pill">
+                      <span>
+                        <i class="white-text fa fa-circle spacer"></i> {{eventname}}
+                      </span>
+                    </div>
+                  {{/if}}
+                </p>
+                <ul class="secondary-content">
+                  {{#if creator user}}
+                    <li class="delNotif">
+                      <a href="#" title="Remove Notification">
+                        <i class="fa fa-trash "></i>
+                      </a>
+                    </li>
+                  {{/if}}
+                </ul>
+              </li>
+            {{/if}}
+          {{/if}}
+      {{/each}}
+      </ul>
+    </div>
+  </div>
+  <div class="col s12 m6">
+    <div class="notifications listStyle">
+      <ul class="collection">
+      {{#each notifications}}
+          {{#if isNotHighPriority priority}}
+            {{#if notOld}}
+              <li class="collection-item avatar {{classFor priority}} dismissable">
+                <span>
+                  <i class="fa fa-bell circle priorityCh"></i>
+                </span>
+                <span class="bold message">{{message}}</span>
+                <p>
+                  {{> timeago createdOn}} by <strong>{{user}}</strong>
+                  {{#if isEvent}}
+                    <div class="amber blue-grey-text bold defaultUser pill">
+                      <span>
+                        <i class="white-text fa fa-circle spacer"></i> {{eventname}}
+                      </span>
+                    </div>
+                  {{/if}}
+                </p>
+                <ul class="secondary-content">
+                  {{#if creator user}}
+                    <li class="delNotif">
+                      <a href="#" title="Remove Notification">
+                        <i class="fa fa-trash "></i>
+                      </a>
+                    </li>
+                  {{/if}}
+                </ul>
+              </li>
+            {{/if}}
+          {{/if}}
+      {{/each}}
+    </ul>
+    </div>
+  </div>
+</template>
+
+<template name="defaultPass">
+  <div class="row">
+    <div class="col s12 m12">
+      <strong>kindly, change your password from default</strong>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col offset-s1 s10 offset-m1 m10 center-align">
+      <input id="current" type="password" name="current" class="validate" value="{{name}}">
+      <label for="current">Enter current password</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col offset-s1 s10 offset-m1 m10 center-align">
+      <input id="password" type="password" name="password" class="validate" value="{{name}}">
+      <label for="password">Enter new password</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col offset-s1 s10 offset-m1 m10 center-align">
+      <input id="password2" type="password" name="password2" class="validate" value="{{name}}">
+      <label for="password2">Re-enter your password</label>
+    </div>
+  </div>
+</template>
+<template name="utility">
+  <div class="row align-center">
+    <div class="col m4 s3">
+      <div class="pill blue">Total Registrations: <strong>{{totalCount}}</strong></div>
+    </div>
+    <div class="col m4 s3">
+      <div class="pill blue">Total Checkins: <strong>{{totalCheckIn}}</strong></div>
+    </div>
+    <div class="col m4 s3">
+      <div class="pill blue">Total Participants: <strong>{{totalParticipants}}</strong></div>
+    </div>
+  </div>
+</template>
+
+<template name="participants">
+  <div class="actParticipants listStyle">
+    <ul class="collection">
+      {{#each participantList}}
+        <li class="collection-item avatar dismissable">
+          <span>
+            <i class="fa fa-user-circle-o circle {{getColor present}}"></i>
+          </span>
+          Member(s):<span class="bold"> {{getNames}}</span>
+          <p>
+            Team Code: <strong>{{code}}</strong>
+          </p>
+          <ul class="secondary-content">
+              {{#if present}}
+                <li >
+                  <a class="blue-text" href="#" title="Participant Onboard">
+                    <i class="fa fa-check "></i>
+                  </a>
+                </li>
+              {{else}}
+                <li >
+                  <a class="deep-orange-text" href="#" title="Waiting for Checkin">
+                    <i class="fa fa-clock-o "></i>
+                  </a>
+                </li>
+              {{/if}}
+          </ul>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</template>
+<template name="eventUtil">
+  <div class="row">
+    <div class="col s4 align-center">
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="row align-center">
+      <div class="col s12 m12">
+        <h5>Add Round Scores</h5>
+      </div>
+    </div>
+    {{#each eventDetails}}
+    {{#if active}}
+    <div class="col s12 m4 align-center">
+      <a href="/judge/{{judgeSheet}}">
+      <button type="button" name="button" class="spaceup  waves-effect waves-light btn-large deep-orange bold">{{name}}</button>
+      </a>
+    </div>
+    {{/if}}
+    {{/each}}
+  </div>
+  <div class="row">
+      {{#each participants}}
+      {{#if status}}
+      <div class="col s6 m3 ">
+        <div class="blue white-text bold defaultUser pill">
+          <span>
+            <i class="white-text fa fa-circle spacer"></i> {{team}}-[{{score}}]
+          </span>
+        </div>
+      </div>
+      {{/if}}
+      {{/each}}
+  </div>
+</template>
+
+<template name="participantsByEvent">
+
+</template>

@@ -1,0 +1,42 @@
+<template name="layout">
+  <link rel="icon" href="/favicon.ico">
+    {{> yield}}
+</template>
+
+<template name="letter_layout">
+  {{>yield}}
+</template>
+
+<template name="userLayout">
+  <div class="mainWrap">
+    <!-- Push Wrapper -->
+    <div class="mp-pusher" id="mp-pusher">
+      {{> navigation}}
+      <div class="scroller"><!-- this is for emulating position fixed of the nav -->
+        <div class="scroller-inner">
+          <!-- Top Navigation -->
+          {{> topNav}}
+
+          {{> header}}
+
+          {{> yield}}
+        </div><!-- /scroller-inner -->
+      </div><!-- /scroller -->
+    </div>
+  </div>
+</template>
+
+
+
+<template name="loginLayout">
+  <div class="loginWrap">
+    {{> yield}}
+    <footer>
+      <a href="#" target="_blank"><img src="/favicon.ico"></a>
+      <p>the green side</p>
+    </footer>
+  </div>
+</template>
+<template name="loadingLayout">
+  {{>loading}}
+</template>

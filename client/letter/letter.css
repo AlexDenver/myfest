@@ -1,0 +1,83 @@
+body .wrap{
+  background: rgb(204,204,204);
+  font-family: sans-serif;
+}
+header{
+  border-bottom: 1px solid grey;
+  padding-bottom: 15px;
+}
+header .leftSide img,header .right img {
+    width: 10%;
+}
+.right{
+  text-align: right;
+  display: inline-block;
+}
+img.right{
+  float: right;
+  margin-right: 25px;
+}
+img.right::after{
+  content: 'COMPOSITE 2k17';
+  display: block;
+}
+.block{
+  display: block;
+}
+.align-center{
+  text-align: center;
+}
+.inline-block{
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+page {
+  background: white;
+  display: block;
+  margin: 0 auto;
+  padding: 1cm 5cm;
+  margin-bottom: 0.5cm;
+  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+}
+p.indent{
+  text-indent: 1.5cm;
+  margin-top: 0;
+  text-align: justify;
+}
+ol.participants {
+    coloumns: 2;
+    -moz-columns: 2;
+    -webkit-columns: 2;
+}
+.letter-body{
+  margin: 2cm 0;
+}
+ol.participants li {
+    margin-left: 25px;
+}
+.signature-box span {
+    font-weight: bold;
+    text-align: right;
+    display: inline-block;
+    border-top: 1px solid grey;
+    padding: 10px 15px 0 15px;
+}
+.signature-box {
+    text-align: right;
+    margin-top: 2cm;
+}
+.center{
+  text-align: center;
+}
+@media print {
+  body, page {
+    margin: 0;
+    box-shadow: 0;
+    font-size: 0.7rem;
+  }
+  page{
+    padding: 10px;
+  }
+
+}

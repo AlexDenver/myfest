@@ -1,0 +1,229 @@
+<template name="manageQuiz">
+    <form id="quizForm">
+      <div class="row">
+        <div class="col s12 m12">
+
+        </div>
+      </div>
+      {{#each question}}
+      <div class="questionWrap" id="qno{{this}}">
+        <div class="row" id="qno{{this}}">
+          <p class="align-center"><strong>Question {{this}}</strong></p>
+          <div class="input-field col s11 m11">
+            <input id="question[{{this}}]" name="question[{{this}}]" type="text" class="validate">
+            <label for="question[{{this}}]">Enter Question {{this}}</label>
+          </div>
+          <div class="col s1 m1 delQuest">
+            <i class="fa fa-trash small" title="Delete Question {{this}}" data-no="{{this}}"></i>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s11 m5">
+            <input id="opa[{{this}}]" name="opa[{{this}}]" type="text" class="validate">
+            <label for="opa[{{this}}]">Enter Option A</label>
+          </div>
+          <div class="col s1 m1">
+            <input name="ans{{this}}" id="ansa[{{this}}]" value="a" type="radio">
+            <label class="" for="ansa[{{this}}]">ANS</label>
+          </div>
+          <div class="input-field col s11 m5">
+            <input id="opb[{{this}}]" name="opb[{{this}}]" type="text" class="validate">
+            <label for="opb[{{this}}]">Enter Option B</label>
+          </div>
+          <div class="col s1 m1">
+            <input name="ans{{this}}" id="ansb[{{this}}]" value="b" type="radio">
+            <label class="" for="ansb[{{this}}]">ANS</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s11 m5">
+            <input id="opc[{{this}}]" name="opc[{{this}}]" type="text" class="validate">
+            <label for="opc[{{this}}]">Enter Option C</label>
+          </div>
+          <div class="col s1 m1">
+            <input name="ans{{this}}" id="ansc[{{this}}]" value="c" type="radio">
+            <label class="" for="ansc[{{this}}]">ANS</label>
+          </div>
+          <div class="input-field col s11 m5">
+            <input id="opd[{{this}}]" name="opd[{{this}}]" type="text" class="validate">
+            <label for="opd[{{this}}]">Enter Option D</label>
+          </div>
+          <div class="col s1 m1">
+            <input name="ans{{this}}" id="ansd[{{this}}]" value="d" type="radio">
+            <label class="" for="ansd[{{this}}]">ANS</label>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+      <div class="row spaceup">
+        <div class="col s12 align-center">
+          <button type="button" class="addQuest waves-effect waves-light btn-large indigo">Add Question</button>
+          <button type="submit" class="submit waves-effect waves-light btn-large blue">Save</button>
+        </div>
+      </div>
+    </form>
+
+</template>
+<template name="quizPanel">
+  <div class="row">
+    <div class="col s12 spaceup align-center">
+      <h5 class="header">{{thisQuiz.name}}</h5>
+    </div>
+  </div>
+  <div class="row">
+    {{#each quizr}}
+    {{#if quizId}}
+    <div class="col s12 m6">
+      <div class="card horizontal light-blue white-text">
+        <div class="card-image">
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+            <strong>
+              {{quizId}}
+            </strong>
+            <h5>{{name}}</h5>
+            <strong>
+              <p>{{roundStart}} - {{roundEnd}}</p>
+            </strong>
+            <div class="row">
+              <div class="col s12 m4 offset-m8 align-center">
+                <strong>go live</strong>
+                <div class="switch">
+                    <label class="black-text">
+                      No
+                      <input type="checkbox" name="isLive" id="isLive" {{isLive}}>
+                      <span class="lever white"></span>
+                      Yes
+                    </label>
+                  </div>
+              </div>
+            </div>
+          </div>
+            <div class="col s6 m6">
+          </div>
+          <div class="card-action blue">
+            <a class="white-text" href="/quiz/start/{{quizId}}">Start Quiz</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+    {{/each}}
+  </div>
+</template>
+<template name="quiz">
+  <div class="csitegreen align-center quizHead">
+    <h1>
+        Composite 2k17 - {{eventName}} Quiz Round
+    </h1>
+  </div>
+  {{#if isLive}}
+    {{#if teamcodeSet}}
+      <div class="container">
+        <div class="row">
+          <div class="col m12">
+            <strong>Team Code: </strong>
+            <h5>
+            <div class="pill csitegreen">
+              <i class="fa fa-user-circle"></i>
+              <strong>
+                {{getTeamCode}}
+              </strong>
+            </div>
+          </h5>
+          </div>
+        </div>
+
+      <form id="quizzie">
+        {{#each getQuest}}
+          <div class="qbox question{{@index}}">
+            <div class="row">
+              <div class="col m12">
+                <h5>
+                  {{{question}}}
+                </h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col m6">
+                <input class="iopt" name="quest{{@index}}" id="opa[{{@index}}]" value="a" type="radio">
+                <label class="option" for="opa[{{@index}}]">{{opa}}</label>
+              </div>
+              <div class="col m6">
+                <input class="iopt" name="quest{{@index}}" id="opb[{{@index}}]" value="b" type="radio">
+                <label class="option" for="opb[{{@index}}]">{{opb}}</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col m6">
+                <input class="iopt" name="quest{{@index}}" id="opc[{{@index}}]" value="c" type="radio">
+                <label class="option" for="opc[{{@index}}]">{{opc}}</label>
+              </div>
+              <div class="col m6">
+                <input class="iopt" name="quest{{@index}}" id="opd[{{@index}}]" value="d" type="radio">
+                <label class="option" for="opd[{{@index}}]">{{opd}}</label>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+        <div class="row spaceup">
+          <div class="col m12 align-center">
+            <button type="submit" class="submit waves-effect waves-light btn-large blue"><i class="fa fa-check"></i> Submit</button>
+          </div>
+        </div>
+        </form>
+      </div>
+    {{else}}
+    <div class="row">
+      <div class="col s6 offset-s3">
+        <form id="quizForm">
+
+        <div class="row">
+          <div class="col s2 right-align">
+            <h1>
+              <i class="fa fa-user-circle-o"></i>
+            </h1>
+          </div>
+          <div class="input-field col s8">
+            <select class="" name="teamCode">
+              <option value="default">Select Team Code...</option>
+              {{#each teamCodes}}
+                <option value="{{this}}">{{this}}</option>
+              {{/each}}
+            </select>
+          </div>
+          {{initSelect}}
+          <div class="col s2">
+            <button type="submit" class="submit waves-effect waves-light btn-large blue">Start</button>
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
+    {{/if}}
+  {{/if}}
+</template>
+<template name="quizLayout">
+  {{>yield}}
+</template>
+
+<template name="viewAns">
+  <div class="contaienr">
+    <div class="col col s12 align-center">
+      <h1>Live Score</h1>
+      <div class="row">
+
+      {{#each answers}}
+      <div class="col s2 m2">
+        <div class="pill blue">
+          <h3>
+            {{team}}  <strong>{{score}}</strong>
+          </h3>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    </div>
+  </div>
+</template>

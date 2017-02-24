@@ -1,0 +1,101 @@
+<template name="schedulerHome">
+  <div class="container">
+    <div class="row align-center">
+      <button type="submit" class="spaceup addSchedule waves-effect waves-light btn-large blue">New Schedule</button>
+    </div>
+    <div class="row">
+      {{#each schedule}}
+      <div class="col s12 m6">
+          <div class="card blue darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">{{name}}</span>
+              <p><i class="fa fa-clock-o pull-right"></i></p>
+            </div>
+            <div class="card-action">
+              <a class="yellow-text bold" href="/scheduler/{{_id}}">Manage</a>
+              <a class="yellow-text bold delete" href="#">Delete</a>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+    </div>
+  </div>
+</template>
+<template name="initSchedule">
+    <form id="scheduleInput" class="scheduleinit" method="post">
+      <div class="row">
+        <div class="input-field col s12 m12">
+          <input required id="nick" name="nick" type="text" class="validate">
+          <label for="nick">Enter a Friendly Name to Refer this Schedule by.</label>
+        </div>
+      </div>
+
+      {{#each days}}
+      <div class="row">
+        <strong>Day {{day}}</strong>
+      </div>
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <input required id="start{{day}}" name="start" type="number" class="validate start" data-index='{{day}}'>
+            <label for="start{{day}}">Enter day {{day}} start Time</label>
+          </div>
+          <div class="input-field col s12 m6">
+            <input required id="end{{day}}" name="end" type="number" class="validate end" data-index='{{day}}'>
+            <label for="end{{day}}">Enter day {{day}} end Time</label>
+          </div>
+        </div>
+      {{/each}}
+
+      <div class="row">
+        <div class="col s6 m6">
+          <button type="button" class="addDay waves-effect waves-light btn-large bold blue"><i class="fa fa-plus-square left"></i>Add Day</button>
+        </div>
+        <div class="col s6 m6">
+          <button type="button" class="remDay waves-effect waves-light btn-large bold red"><i class="fa fa-minus-square left"></i>Remove Day</button>
+        </div>
+      </div>
+      <div class="row bold">
+        <div class="input-field col s12 m6">
+          <input required id="eclose" name="eclose" type="number" class="validate eclose">
+          <label for="eclose">Enter Events Close-by Time</label>
+        </div>
+        <div class="input-field col s12 m6">
+          <input required id="eclearance" name="eclearance" value="1" type="number" class="validate interval">
+          <label class='active' for="eclearance">Slot Interval Between Rounds .</label>
+        </div>
+      </div>
+      {{>slotHelp}}
+      <div class="row black-text bold">
+        <div class="input-field col s12 m6">
+          <input required id="innaguration" name="innaguration" type="number" class="validate festinit" >
+          <label for="innaguration">Time Slots Required for Innaguration.</label>
+        </div>
+        <div class="input-field col s12 m6">
+          <input required id="valedict" name="valedict" type="number" class="validate valedict">
+          <label for="valedict">Time slots required for Valedictory</label>
+        </div>
+      </div>
+
+      <div class="row align-center">
+        <button type="submit" class=" waves-effect waves-light btn-large csite-green">Generate Table</button>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col m6">
+        <pre class="red white-text">{{daysString}}</pre>
+      </div>
+    </div>
+</template>
+<template name="slotHelp">
+  <div class="row">
+    <div class="col s12">
+      <p class="bold">A day is divided into slots of 30min each, number of slots per day depend on the above input.</p>
+      <p>Input boxes below you need to specify how many slots are required for the said standard ceremony, it is assumed the following event take place at the begining and/or end of the entire fest.</p>
+      <p>For Ex: if Innaguration Ceremony is to extend for <b>1 hour 30 minutes</b> Your input should be <b>3</b> as it takes 3 slots of 30 minutes each.</p>
+    </div>
+  </div>
+</template>
+
+<template name="schedulerTable">
+
+</template>
