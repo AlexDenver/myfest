@@ -1,0 +1,19 @@
+{
+  "name": "myfest",
+  "private": true,
+  "author": "Alex Denver",
+  "license": "ISC",
+  "description": "Real Time Fest Management System",
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "angular": "^1.6.1",
+    "angular-animate": "^1.6.1",
+    "angular-aria": "^1.6.1",
+    "angular-material": "^1.1.1",
+    "babel-runtime": "6.18.0",
+    "bcrypt": "^1.0.2",
+    "meteor-node-stubs": "~0.2.0"
+  }
+}

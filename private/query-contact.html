@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>HTML email test</title>
+  <link href="styles.css" media="all" rel="stylesheet" type="text/css" />
+</head>
+
+<body itemscope itemtype="http://schema.org/EmailMessage" style="font-family:sans-serif;">
+  <table width="100%" border="0" style="background:#ecf0f1;">
+    <tr>
+      <td style="background:#fff;" colspan="2">
+        <h1 style="font-family:monospace,sans-serif;margin:0;color:#2c3e50;text-align:center;">COMPOS<span style="font-weight:bold;color:#02a780;">IT</span>E</h1>
+      </td>
+      <td  style="background:#02a780;padding:15px;text-align:center;">
+        <h2 style="color:#ecf0f1;margin:0;">NEW QUERY</h2>
+      </td>
+    </tr>
+    <tr style="background:#ecf0f1;color:#34495e;text-align:left;padding:5px;">
+      <td colspan="3" style="padding:10px;">
+        <p style="text-align:justify;padding:15px 10px;">
+          <strong>New Query Recieved</strong>
+        </p>
+      </td>
+    </tr>
+    <tr style="background:#ecf0f1;color:#34495e;text-align:left;padding:5px;">
+      <td colspan="3" style="padding:10px;">
+
+        <p style="text-align:justify;padding:15px 10px;">
+          From {{name}},
+        </p>
+        <p style="text-align:justify;padding:25px 10px;text-indent:25px;">
+          {{message}}
+        </p>
+      </td>
+    </tr>
+    <tr style="background:#ecf0f1;color:#34495e;text-align:center;padding:5px;">
+      <td colspan="2" style="padding:10px;">
+        <span style="font-weight:900;">Email ID :</span>
+      </td>
+      <td style="text-align:center;">
+        <span>{{email}}</span>
+      </td>
+    </tr>
+    <tr style="background:#ecf0f1;color:#34495e;text-align:center;padding:5px;">
+      <td colspan="3" style="padding:10px;">
+        <strong>OTHER DETAILS</strong>
+      </td>
+    </tr>
+
+    <tr style="background:#ecf0f1;color:#34495e;text-align:center;padding:5px;">
+      <td style="padding:10px;">
+        {{mob}}
+      </td>
+      <td style="padding:10px;">
+        {{email}}
+      </td>
+      <td style="padding:10px;">
+        {{name}}
+      </td>
+
+    </tr>
+
+    <tr style="background:#ecf0f1;color:#34495e;padding:5px;">
+      <td colspan="3" style="background:#ecf0f1;color:#34495e;text-align:center;padding:15px;"> </td>
+    </tr>
+    <tr style="background:#ecf0f1;color:#34495e;padding:5px;">
+      <td colspan="3" style="background:#ecf0f1;color:#34495e;text-align:center;padding:15px;">
+        <strong>This Was Generated from </strong><h3 style="font-family:monospace,sans-serif;margin:0;color:#2c3e50;text-align:center;display:inline;">COMPOS<span style="font-weight:bold;color:#02a780;">IT</span>E</h3> <strong>Website</strong>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" style="background:#2c3e50;padding:15px">
+        <small style="color:#ecf0f1;">&copy; COMPOS<span style="font-weight:bold;color:#02a780;">IT</span>E 2k17 - All Rights Reserved </small>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

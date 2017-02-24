@@ -1,0 +1,71 @@
+
+Router.configure({
+  layoutTemplate: 'layout'
+})
+if(Meteor.isServer) {
+  WebApp.rawConnectHandlers.use("/reg", function(req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    return next();
+  });
+  Router.route("/reg", function() {
+    var json = this.request.body;
+    var url = this.request.headers['origin'];
+    console.log(url);
+    // console.log(this.request);
+    // console.log(JSON.stringify(json));
+    // console.log(JSON.stringify(json));
+    console.log(json);
+    if(url === 'http://127.0.0.1:4000'){
+    //  var id = entry.insert();
+      this.response.statusCode = 455;
+      this.response.end(id);
+    }else{
+      console.log("Invalid Source");
+      this.response.statusCode = 455;
+      this.response.end();
+    }
+  }, {where: "server"});
+
+
+}
+Router.map(function(){
+  this.route('letter',{
+    path: '/letter',
+    template: 'letter',
+    data: function(){
+      var regx = this.request.body;
+      console.log(regx);
+      templateData = entry.findOne({reg_id: regx})
+      return templateData;
+    }
+
+  })
+});
+
+if(Meteor.isClient){
+  Router.route("/", function(){
+    this.render('home');
+  });
+}
+
+
+
+// var json = this.request.body;
+// var id = json.reg_id;
+//
+// var doc = new PDFDocument({size: 'A4', margin: 50});
+// var salute = "to whom it may concern,";
+// var body = "	this document when duly filled grants the students of your department listed below explicit permission to participate in various events conducted at the National Level Inter-Collegiate Level Fest COMPOSITE 2k17 by the Department of BCA of St Aloysisius Degree College (Autonomous), Mangalore. ";
+// var students ;
+// var footer = "this form can be signed by any authorative member of the college (Dean/HOD/Principal/Staff in-charge)"
+// doc.image(process.env.PWD + '/public/img/pdf-header.png', 0,30,{width: 600});
+// doc.fontSize(25).fillColor('white');
+// doc.text(salute, 25, 80, {
+//   align: 'center',
+//   width: 600
+// });
+// this.response.writeHead(200, {
+//   'Content-Type': 'application/pdf',
+//   'Content-Disposition' : 'attachment; filename=permission.pdf'
+// });
+// this.response.end(doc.outputSync());
